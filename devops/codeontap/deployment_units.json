@@ -1,0 +1,4 @@
+{
+    "Units" : ["mgmt", "mgmt-task"],
+    "Formats" : ["docker"]
+}
