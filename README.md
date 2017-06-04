@@ -157,6 +157,17 @@ COUCHDB_PASSWORD=
 SENTRY_DSN=
 ```
 
+### SMTP
+```
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USERNAME=
+SMTP_PASSWORD=
+SMTP_USE_TLS=
+FROM_EMAIL=
+
+```
+
 ### AWS service access
 
 ```
