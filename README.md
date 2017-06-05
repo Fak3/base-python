@@ -165,7 +165,9 @@ SMTP_USERNAME=
 SMTP_PASSWORD=
 SMTP_USE_TLS=
 SMTP_FROM_EMAIL=
-
+#
+# If a configurable backend is needed, use this to hold the desired module
+DJANGO_EMAIL_BACKEND=
 ```
 
 ### AWS service access
