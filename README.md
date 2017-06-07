@@ -101,6 +101,7 @@ APP_WORKER_COUNT="3"
 ```
 DJANGO_DEBUG=True
 DJANGO_SECRET_KEY=
+BASE_URL=
 ```
 
 If debug is false, then a value must be provided for DJANGO_SECRET_KEY.
