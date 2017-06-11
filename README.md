@@ -101,6 +101,7 @@ APP_WORKER_COUNT="3"
 ```
 DJANGO_DEBUG=True
 DJANGO_SECRET_KEY=
+DJANGO_TIMEZONE=
 BASE_URL=
 ```
 
@@ -186,7 +187,16 @@ APPDATA_BUCKET=
 APPDATA_PREFIX=
 ```
 
-Structure under prefix is up to the pplication. Note that in higher environments, multiple instances of any application will be accessing the same bucket so consider this in your code design.
+Directory structure under prefix is up to the application. Note that in higher environments, multiple instances of any application will be accessing the same bucket so consider this in your code design.
+
+### Search
+
+ELASTICSEARCH_URL=
+ELASTICSEARCH_INDEX=
+#
+# If a configurable backend is needed, use this to hold the desired module
+ELASTICSEARCH_ENGINE=
+```
 
 ### Local development (TODO: review/update)
 

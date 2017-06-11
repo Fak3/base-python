@@ -33,7 +33,7 @@
                         (credentialsObject[formatComponentShortName(
                                             tier,
                                             component,
-                                            "{containerid}")])!""]
+                                            "${containerid}")])!""]
             [#if secretKeyDetails?has_content]
                 [@environmentVariable
                     "DJANGO_SECRET_KEY" secretKeyDetails.API.SecretKey
@@ -45,8 +45,12 @@
                     containerListTarget containerListMode /]
             [/#if]
 
+            [@environmentVariable
+                "DJANGO_TIMEZONE" "Australia/Canberra"
+                containerListTarget containerListMode /]
+
             [#assign dbTier = getTier("db")]
-            [#assign dbComponent = getComponent("db", "{containerid}", "rds")]
+            [#assign dbComponent = getComponent("db", "${containerid}", "rds")]
             [#assign rdsId = formatRDSId(dbTier, dbComponent)]
             [#if getKey(formatRDSDnsId(rdsId))?has_content]
                 [@environmentVariable
@@ -88,7 +92,7 @@
                 "RABBITMQ_PASSWORD" "guest"
                 containerListTarget containerListMode /]
 
-            [#assign cacheComponent = getComponent("db", "{containerid}", "cache")]
+            [#assign cacheComponent = getComponent("db", "${containerid}", "cache")]
             [#assign cacheId = formatCacheId(dbTier, cacheComponent)]
             [#if getKey(formatCacheDnsId(cacheId))?has_content]
                 [@environmentVariable
@@ -138,6 +142,45 @@
             [#if sentryDetails??]
                 [@environmentVariable
                     "SENTRY_DSN" sentryDetails.API.SecretKey
+                    containerListTarget containerListMode /]
+            [/#if]
+            
+            [#assign sesCredentials = 
+                            credentialsObject["smtp"]!""]
+            [#if sesCredentials?has_content]
+                [@environmentVariable
+                    "SMTP_HOST" "email-smtp.us-west-2.amazonaws.com"
+                    containerListTarget containerListMode /]
+                [@environmentVariable
+                    "SMTP_PORT" "587"
+                    containerListTarget containerListMode /]
+                [@environmentVariable
+                    "SMTP_USERNAME" sesCredentials.Login.Username
+                    containerListTarget containerListMode /]
+                [@environmentVariable
+                    "SMTP_PASSWORD" sesCredentials.Login.Password
+                    containerListTarget containerListMode /]
+                [@environmentVariable
+                    "SMTP_USE_TLS" "true"
+                    containerListTarget containerListMode /]
+                [@environmentVariable
+                    "SMTP_FROM_EMAIL" "biosecurity@dawr.gosource.com.au"
+                    containerListTarget containerListMode /]
+            [/#if]
+
+            [#assign anaTier = getTier("ana")]
+            [#assign esComponent = getComponent("ana", "es", "es")]
+            [#assign esId = formatElasticSearchId(anaTier, esComponent)]
+            [#if getKey(formatElasticSearchDnsId(esId))?has_content]
+                [@environmentVariable
+                    "ELASTICSEARCH_URL" 
+                    "https://" + 
+                        getKey(formatElasticSearchDnsId(cacheId)) +
+                        ":443"
+                    containerListTarget containerListMode /]
+                [@environmentVariable
+                    "ELASTICSEARCH_INDEX" 
+                    "${projectName}-${containerName}-${containerid}"
                     containerListTarget containerListMode /]
             [/#if]
 
