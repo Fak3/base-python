@@ -173,13 +173,13 @@
             [#assign esId = formatElasticSearchId(anaTier, esComponent)]
             [#if getKey(formatElasticSearchDnsId(esId))?has_content]
                 [@environmentVariable
-                    "ELASTICSEARCH_URL" 
+                    "ANALYTICS_ES_ENDPOINT"
                     "https://" + 
                         getKey(formatElasticSearchDnsId(cacheId)) +
                         ":443"
                     containerListTarget containerListMode /]
                 [@environmentVariable
-                    "ELASTICSEARCH_INDEX" 
+                    "ANALYTICS_ES_INDEX_NAME"
                     "${containerName}"
                     containerListTarget containerListMode /]
             [/#if]

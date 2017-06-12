@@ -191,11 +191,11 @@ Directory structure under prefix is up to the application. Note that in higher e
 
 ### Search
 
-ELASTICSEARCH_URL=
-ELASTICSEARCH_INDEX=
+ANALYTICS_ES_ENDPOINT=
+ANALYTICS_ES_INDEX_NAME=
 #
 # If a configurable backend is needed, use this to hold the desired module
-ELASTICSEARCH_ENGINE=
+ANALYTICS_ES_ENGINE=
 ```
 
 ### Local development (TODO: review/update)
