@@ -180,7 +180,7 @@
                     containerListTarget containerListMode /]
                 [@environmentVariable
                     "ELASTICSEARCH_INDEX" 
-                    "${projectName}-${containerName}-${containerid}"
+                    "${containerName}"
                     containerListTarget containerListMode /]
             [/#if]
 
