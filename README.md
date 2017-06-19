@@ -195,6 +195,7 @@ ANALYTICS_ES_ENDPOINT=
 ANALYTICS_ES_INDEX_NAME=
 #
 # If a configurable backend is needed, use this to hold the desired module
+```
 ANALYTICS_ES_ENGINE=
 ```
 
