@@ -62,7 +62,7 @@ When run as a docker container, the codeontap docker packaging supports running 
 Each mode has a corresponding script in the ./src directory of the form 
 
 ```
-container-{lower-case-mode}.sh
+entrypoint-{lower-case-mode}.sh
 ```
 
 Adding or modifying the provided modes should be done in consultation with the devops team. Suggestions welcome as PRs.
