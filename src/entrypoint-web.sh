@@ -20,9 +20,13 @@ echo [TIMING `date +"%F %R:%S"`] Starting nginx
 # run main worker in current thread
 echo [TIMING `date +"%F %R:%S"`] Starting www workers
 
-gunicorn "app_dir.wsgi:application" \
+
+WSGI_APP=$(python -c "from django.conf import settings; print(settings.WSGI_APPLICATION[:-12])")
+echo [TIMING `date +"%F %R:%S"`] Using WSGI_APP $WSGI_APP
+
+gunicorn "$WSGI_APP" \
          --bind "0.0.0.0:8000" \
-         --workers "${APP_WORKER_COUNT:-1}" \
+         --workers "${APP_WORKER_COUNT:-4}" \
          --log-level "info" \
          --reload \
          --timeout 600 \
